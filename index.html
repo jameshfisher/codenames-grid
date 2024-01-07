@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Codenames Grid</title>
+    <style>
+      table {
+        border-collapse: separate;
+        border-spacing: 10px;
+        width: 100%;
+        max-width: 600px; /* Adjust this value as needed */
+        margin: auto;
+      }
+      td {
+        width: 100px; /* Width of the card */
+        height: 70px; /* Height of the card */
+        text-align: center;
+        vertical-align: middle;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for depth */
+      }
+      .red {
+        background-color: red;
+      }
+      .blue {
+        background-color: blue;
+      }
+      .neutral {
+        background-color: beige;
+      }
+      .assassin {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="codenamesGrid"></table>
+    <script>
+      function generateGrid() {
+        const grid = document.getElementById("codenamesGrid");
+        grid.innerHTML = "";
+
+        let colors = [
+          "red",
+          "red",
+          "red",
+          "red",
+          "red",
+          "red",
+          "red",
+          "red",
+          "red",
+          "blue",
+          "blue",
+          "blue",
+          "blue",
+          "blue",
+          "blue",
+          "blue",
+          "blue",
+          "assassin",
+          "neutral",
+          "neutral",
+          "neutral",
+          "neutral",
+          "neutral",
+          "neutral",
+          "neutral",
+        ];
+
+        // Fisher-Yates shuffle
+        for (let i = colors.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [colors[i], colors[j]] = [colors[j], colors[i]];
+        }
+
+        let count = 0;
+        for (let i = 0; i < 5; i++) {
+          const row = document.createElement("tr");
+          for (let j = 0; j < 5; j++) {
+            const cell = document.createElement("td");
+            cell.classList.add(colors[count++]);
+            row.appendChild(cell);
+          }
+          grid.appendChild(row);
+        }
+      }
+
+      generateGrid();
+    </script>
+  </body>
+</html>
